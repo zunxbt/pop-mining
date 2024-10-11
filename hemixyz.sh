@@ -129,6 +129,7 @@ After=network.target
 [Service]
 WorkingDirectory=$(pwd)
 ExecStart=$(pwd)/popmd
+Environment="POPM_BFG_REQUEST_TIMEOUT=60s"
 Environment="POPM_BTC_PRIVKEY=$priv_key"
 Environment="POPM_STATIC_FEE=$static_fee"
 Environment="POPM_BFG_URL=wss://testnet.rpc.hemi.network/v1/ws/public"
