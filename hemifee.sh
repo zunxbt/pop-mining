@@ -4,11 +4,6 @@ show() {
     echo -e "\033[1;35m$1\033[0m"
 }
 
-
-if ps aux | grep "[h]emifee.sh" > /dev/null; then
-    ps aux | grep "[h]emifee.sh" | awk '{print $2}' | xargs kill
-fi
-
 restart_service() {
     local service_name="hemi.service"
     local attempts=0
