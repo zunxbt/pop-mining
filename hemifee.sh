@@ -4,6 +4,11 @@ show() {
     echo -e "\033[1;35m$1\033[0m"
 }
 
+
+if ps aux | grep "[h]emifee.sh" > /dev/null; then
+    ps aux | grep "[h]emifee.sh" | awk '{print $2}' | xargs kill
+fi
+
 restart_service() {
     local service_name="hemi.service"
     local attempts=0
@@ -17,7 +22,7 @@ restart_service() {
         else
             attempts=$((attempts + 1))
             show "Failed to restart $service_name (Attempt $attempts/$max_attempts). Retrying in 5 seconds..."
-            sleep 5
+            sleep 15
         fi
     done
 
@@ -47,16 +52,16 @@ fetch_and_update_fee() {
                 sudo sed -i "/\[Service\]/a Environment=\"POPM_STATIC_FEE=$static_fee\"" "$service_file"
                 
                 sudo systemctl daemon-reload
-                show "Waiting 2 seconds before restarting the service..."
-                sleep 2
+                show "Waiting 15 seconds before restarting the service..."
+                sleep 15
 
                 restart_service "$service_name"
             fi
 
             sleep 600
         else
-            show "Failed to fetch static fee. Retrying in 10 seconds."
-            sleep 10
+            show "Failed to fetch static fee. Retrying in 15 seconds."
+            sleep 15
             continue
         fi
     done
