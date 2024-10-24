@@ -10,6 +10,12 @@ screen -X -S hemi-fee-updater quit
 ```bash
 screen -S hemi-fee-updater
 ```
+- Use this command to delete any existing fee updater script
+```bash
+if ps aux | grep "[h]emifee.sh" > /dev/null; then
+    ps aux | grep "[h]emifee.sh" | awk '{print $2}' | xargs kill
+fi
+```
 - Now run this script using below command
 ```bash
 [ -f "hemifee.sh" ] && rm hemifee.sh; curl -sSL -o hemifee.sh https://raw.githubusercontent.com/zunxbt/pop-mining/refs/heads/main/hemifee.sh && chmod +x hemifee.sh && ./hemifee.sh
