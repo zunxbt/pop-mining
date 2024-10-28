@@ -140,6 +140,7 @@ WantedBy=multi-user.target
 EOF
 
 sudo systemctl daemon-reload
+sleep 15
 sudo systemctl enable hemi.service
 sudo systemctl start hemi.service
 echo
